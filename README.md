@@ -143,3 +143,254 @@ index.html
 tailwind.config.js
 vite.config.js
 ```
+
+## Frontend Structure (`carbonsight-frontend/`)
+
+```text
+src/
+  components/
+    CarbonTooltip.jsx
+    OptimizedChip.jsx
+    PromptSuggestor.jsx
+    CarbonForecastPanel.jsx
+    Navbar.jsx
+    Sidebar.jsx
+  App.jsx
+public/
+index.html
+tailwind.config.js
+vite.config.js
+
+public/
+index.html
+
+tailwind.config.js
+vite.config.js
+```
+
+API Endpoints
+
+Endpoint	Description
+
+```text
+/ask	Main AI response endpoint with routing, caching, and carbon tracking
+/optimize	Prompt rewriting using R-EcoWrite
+/coach	Prompt coaching and energy estimation
+/plan	Eco-Plan generation for structured reasoning
+/forecast	Carbon usage forecasting
+```
+
+Running the Project Locally:
+
+- Frontend
+
+```text
+cd carbonsight-frontend
+npm install
+npm run dev
+```
+
+- Backend
+```text
+Deployed on AWS Lambda
+```
+
+- Uses Amazon Bedrock (Nova models)
+
+- Requires AWS credentials with Bedrock access enabled
+
+Prompt Lifecycle (End-to-End Flow)
+```text
+User Input
+   |
+   |-- (Optional) Prompt Coach
+   |       - Clarity analysis
+   |       - Redundancy detection
+   |       - Energy estimation
+   |
+   |-- (Optional) R-EcoWrite
+   |       - Prompt rewritten to reduce tokens
+   |       - Carbon savings computed
+   |
+   |-- (Optional) Eco-Plan
+   |       - Step-by-step execution plan generated
+   |       - Plan displayed to user
+   |
+   v
+Semantic Embedding
+   |
+   |-- Similarity Check (DynamoDB)
+   |       - Cache hit → return response
+   |       - Cache miss → continue
+   |
+   v
+Complexity Classification
+   |
+   |-- Model Routing
+   |       - Micro / Lite / Pro (Nova models)
+   |
+   v
+LLM Invocation (Amazon Bedrock)
+   |
+   |-- Energy + CO₂ Estimation
+   |
+   v
+Response Returned
+   |
+   |-- Cache Stored
+   |-- Metrics Visualized
+```
+
+## AWS Technology Stack
+
+### Compute & Orchestration
+  - AWS Lambda
+  - Stateless agent orchestration
+  - Scales automatically with usage
+
+### Generative AI
+  - Amazon Bedrock
+  A. amazon.nova-micro-v1:0: Classification, routing, prompt rewriting
+  B. amazon.nova-lite-v1:0: Standard responses, medium complexity
+  C. amazon.nova-pro-v1:0: Complex reasoning and long-form responses
+
+### Storage & Caching
+  A. Amazon DynamoDB
+    - Semantic cache for embeddings
+    - Prevents redundant LLM calls
+    - Reduces cost and carbon emissions
+  B. Intelligence & Agents
+    - Embedding-based similarity search
+    - Agent-driven orchestration
+    - Carbon estimation heuristics
+
+
+## Development with Kiro (Spec-Driven, Agentic Workflow)
+
+Carbonsight was developed using **Kiro** to move from rapid prototyping to a structured, production-ready Generative AI system. Kiro was used not just as an IDE, but as a **coordination layer for agent design, system behavior, and dashboard evolution**.
+
+---
+
+### 1. Specs — Agentic Feature Design by Role
+
+Each major capability in Carbonsight was built as an independent **spec**, allowing features to evolve cleanly without breaking the system.
+
+For every spec, Kiro generated and tracked:
+
+- `requirements.md`  
+  - User stories written in **EARS notation**
+  - Explicit behavioral guarantees for agents, dashboards, and APIs
+
+- `design.md`  
+  - Agent responsibilities and boundaries  
+  - Prompt lifecycle diagrams  
+  - Data flow between frontend, Lambda, Bedrock, and DynamoDB  
+
+- `tasks.md`  
+  - Discrete backend and frontend tasks  
+  - Clear separation between agent logic, routing, and visualization  
+  - Real-time tracking of implementation progress  
+
+#### Agent-Specific Specs Created
+- **R-EcoWrite Agent** — prompt rewriting for carbon reduction
+- **Prompt Coach Agent** — clarity analysis and energy estimation
+- **Eco-Plan Agent** — step-wise execution planning
+- **Routing Agent** — complexity classification and model selection
+- **Carbon Agent** — energy and CO₂ estimation
+- **Caching Agent** — semantic similarity and reuse
+
+#### Dashboard-Specific Specs Created
+- **User Dashboard Spec**
+  - Efficiency score
+  - Prompt-level carbon metrics
+  - Token and model usage history
+
+- **Team Dashboard Spec**
+  - Leaderboards
+  - Model usage heatmaps
+  - Aggregated CO₂ savings
+
+- **Admin Dashboard Spec**
+  - Organization-wide analytics
+  - ESG reporting views
+  - Sustainability trends
+
+This spec-first approach ensured:
+- Clear separation of concerns across agents and UI layers
+- Predictable system behavior
+- Strong alignment between product intent and implementation
+
+---
+
+### 2. Hooks — Automated Quality and Consistency
+
+Kiro hooks were used to automate repetitive but critical development checks, especially important in an agent-heavy system.
+
+Hooks were configured to:
+
+- Enforce consistent file and agent structure
+- Auto-review agent logic after file saves
+- Flag missing error handling in Lambda handlers
+- Standardize API response schemas across endpoints
+- Prevent accidental regression in routing and caching logic
+
+This reduced manual review overhead and ensured agent behavior stayed consistent as features were added quickly during the hackathon.
+
+---
+
+### 3. Steering — Sustainability-First Agent Behavior
+
+Steering was used to guide **global system behavior**, especially around sustainability constraints.
+
+Steering rules were applied to:
+
+- Prefer lower-carbon models (Nova Micro / Lite) when possible
+- Restrict Nova Pro usage to genuinely complex queries
+- Enforce prompt optimization before expensive calls
+- Maintain consistent carbon accounting across all agents
+- Align dashboard metrics with backend estimations
+
+This allowed Carbonsight to behave as a **responsible, sustainability-aware AI system by default**, not as an afterthought.
+
+---
+
+### Impact of Using Kiro
+
+Using Kiro enabled Carbonsight to:
+- Move fast without accumulating design debt
+- Scale from a chat prototype to a multi-agent platform
+- Keep agent behavior explainable and auditable
+- Design dashboards in parallel with backend logic
+- Maintain production-level clarity under hackathon timelines
+
+---
+
+## Why This Project Fits the Hackathon
+
+- Built entirely on **AWS Generative AI infrastructure**
+- Directly addresses **Climate & Sustainability**
+- Demonstrates **agentic system design at scale**
+- Goes beyond chat into:
+  - Prompt optimization
+  - Execution planning
+  - Carbon observability
+  - Responsible AI usage
+- Designed from day one for **enterprise dashboards and ESG reporting**
+
+---
+
+## Future Extensions
+
+- Full User, Team, and Admin dashboards
+- Organization-wide ESG reporting
+- Model usage heatmaps
+- Sustainability leaderboards
+- SageMaker-based forecasting models
+- Optional blockchain-backed sustainability credits
+
+---
+
+## Author
+
+**Advita Shrivastava**  
+AWS ImpactX – Generative AI Innovate & Build Challenge
