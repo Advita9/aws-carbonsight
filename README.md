@@ -107,6 +107,89 @@ A forecasting agent is included as an extensible module.
 
 ---
 
+## Reading the Carbonsight Interface
+
+Carbonsight uses simple visual signals to make model choice, efficiency, and sustainability transparent. Every UI element reflects a real backend decision.
+
+---
+
+### Model Indicator (Top Bar)
+
+The animated bubble shows which class of model powered the latest response:
+
+- **Green** — Low-carbon execution  
+  Cached responses, optimized prompts, or lightweight models (Nova Micro)
+
+- **Yellow** — Medium complexity  
+  Balanced reasoning with controlled cost (Nova Lite)
+
+- **Red** — High complexity  
+  Large models used only when required (Nova Pro)
+
+Model selection is handled by the routing agent, not the frontend.
+
+---
+
+### Cached Responses
+
+When a response is reused via semantic cache:
+- A **“Served from cache”** label appears
+- Energy and CO₂ usage are recorded as zero
+- The indicator remains green
+
+This avoids redundant inference and reduces carbon cost.
+
+---
+
+### R-EcoWrite (Prompt Optimization)
+
+When **Optimize** is enabled:
+- The user’s original prompt is preserved
+- A green optimization chip shows the rewritten prompt and estimated savings
+- Only the optimized prompt is sent to downstream agents
+
+Optimization is transparent and auditable.
+
+---
+
+### Prompt Coach (Suggest Mode)
+
+Prompt Coach is advisory only:
+- No request is sent to `/ask`
+- Users see clarity, redundancy, and energy estimates
+- Helps refine prompts before spending tokens
+
+---
+
+### Eco-Plan (Execution Planning)
+
+For complex queries:
+1. A step-by-step plan is generated
+2. Steps are shown in the side panel
+3. The final response follows this plan
+
+This improves accuracy and reduces hallucinations.
+
+---
+
+### Carbon Tooltips
+
+Hovering over responses reveals:
+- Model used
+- Cache status
+- Predicted vs actual energy and CO₂
+
+---
+
+### Design Philosophy
+
+Carbonsight treats sustainability as a system constraint:
+- Efficient behavior is visible
+- Model usage is transparent
+- Reuse is preferred over regeneration
+
+---
+
 ## Architecture Overview
 
 ### Frontend
@@ -287,7 +370,7 @@ Response Returned
 
 ---
 
-## How We Used Kiro in Carbonsight
+## Kiro Usage
 
 Kiro was used as a **spec-first coordination layer** to structure Carbonsight’s multi-agent system and dashboards.
 
@@ -354,8 +437,6 @@ Steering was used to keep global behavior consistent:
 - Run optimization before planning or execution
 - Prevent accidental overuse of Nova Pro
 - Keep carbon accounting consistent across features
-
-This ensured Carbonsight stayed sustainability-first even as features were added rapidly.
 
 ---
 
