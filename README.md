@@ -168,19 +168,22 @@ tailwind.config.js
 vite.config.js
 ```
 
-API Endpoints
+## API Endpoints
 
-Endpoint	Description
 
 ```text
 /ask	Main AI response endpoint with routing, caching, and carbon tracking
+
 /optimize	Prompt rewriting using R-EcoWrite
+
 /coach	Prompt coaching and energy estimation
+
 /plan	Eco-Plan generation for structured reasoning
+
 /forecast	Carbon usage forecasting
 ```
 
-Running the Project Locally:
+## Running the Project Locally:
 
 - Frontend
 
@@ -191,15 +194,17 @@ npm run dev
 ```
 
 - Backend
+
 ```text
 Deployed on AWS Lambda
 ```
 
-- Uses Amazon Bedrock (Nova models)
 
-- Requires AWS credentials with Bedrock access enabled
+(Requires AWS credentials with Bedrock access enabled)
 
-Prompt Lifecycle (End-to-End Flow)
+
+## Prompt Lifecycle (End-to-End Flow)
+
 ```text
 User Input
    |
@@ -245,8 +250,8 @@ Response Returned
 
 ### Compute & Orchestration
   - AWS Lambda
-  - Stateless agent orchestration
-  - Scales automatically with usage
+    - Stateless agent orchestration
+    - Scales automatically with usage
 
 ### Generative AI
   - Amazon Bedrock
@@ -265,17 +270,19 @@ Response Returned
     - Agent-driven orchestration
     - Carbon estimation heuristics
 
+---
+
 ## How We Used Kiro in Carbonsight
 
-Kiro was used as a **spec-first coordination layer** to structure Carbonsight’s multi-agent system and dashboards while we were actively building and iterating.
+Kiro was used as a **spec-first coordination layer** to structure Carbonsight’s multi-agent system and dashboards.
 
-Instead of writing features directly in code, we used Kiro to lock down **what each agent and dashboard is responsible for**, and then implemented against those specs.
+Instead of writing features directly in code, Kiro locked down **what each agent and dashboard is responsible for**, and then implemented against those specs.
 
 ---
 
 ### Specs — Feature-by-Feature, Not Theory
 
-We created a separate Kiro spec for each major Carbonsight capability:
+A separate Kiro spec for each major Carbonsight capability:
 
 - **R-EcoWrite (Prompt Optimization)**
   - Defined when rewriting should trigger
@@ -307,13 +314,13 @@ Each spec produced:
 - A clear data flow (frontend → Lambda → Bedrock → cache)
 - A task list that mapped directly to files and endpoints
 
-This helped us avoid feature overlap and agent conflicts as the system grew.
+This helped avoid feature overlap and agent conflicts as the system grew.
 
 ---
 
 ### Hooks — Keeping Agent Code Clean Under Pressure
 
-We used Kiro hooks mainly as **guardrails** during fast iteration:
+Kiro hooks used mainly as **guardrails** during fast iteration:
 
 - Checked new agent files for missing error handling
 - Flagged inconsistent API response shapes
@@ -339,14 +346,13 @@ This ensured Carbonsight stayed sustainability-first even as features were added
 
 ### Why Kiro Mattered Here
 
-Kiro helped us:
+Kiro helped:
 - Build multiple GenAI agents without losing control
 - Keep prompt lifecycle and execution transparent
 - Design dashboards in parallel with backend logic
 - Maintain production discipline during a hackathon
 
-It let us move fast **without turning the system into an unstructured prompt soup**.
-
+---
 
 ## Why This Project Fits the Hackathon
 
@@ -364,7 +370,6 @@ It let us move fast **without turning the system into an unstructured prompt sou
 
 ## Future Extensions
 
-- Full User, Team, and Admin dashboards
 - Organization-wide ESG reporting
 - Model usage heatmaps
 - Sustainability leaderboards
