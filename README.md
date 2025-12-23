@@ -24,7 +24,7 @@ Carbonsight helps developers and organizations:
 - Visualize and incentivize sustainable AI behavior
 
 ---
-<img src="carbonsight-frontend/arch-diagram.png" alt="A beautiful landscape" width="1200" height="500">
+<img src="images/arch-diagram.png" alt="A beautiful landscape" width="1200" height="500">
 
 ## Key Features
 
@@ -92,6 +92,15 @@ The system supports:
 A forecasting agent is included as an extensible module.
 
 ---
+
+## Project Feature Gallery (UI screenshots)
+
+<img src="images/feature1.jpeg" alt="A beautiful landscape" width="1200" height="500">
+
+<img src="images/feature2.jpeg" alt="A beautiful landscape" width="1200" height="500">
+
+<img src="images/feature3.jpeg" alt="A beautiful landscape" width="1200" height="500">
+
 
 ## Architecture Overview
 
