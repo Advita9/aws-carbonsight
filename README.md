@@ -97,10 +97,15 @@ A forecasting agent is included as an extensible module.
 
 <img src="images/feature1.jpeg" alt="A beautiful landscape">
 
-<img src="images/feature2.jpeg" alt="A beautiful landscape">
+---
+
+<img src="images/feature.2.jpeg" alt="A beautiful landscape">
+
+---
 
 <img src="images/feature3.jpeg" alt="A beautiful landscape">
 
+---
 
 ## Architecture Overview
 
