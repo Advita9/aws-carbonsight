@@ -1,7 +1,16 @@
 # Carbonsight  
 **Carbon-Aware Agentic AI Platform built on AWS**
 
-Carbonsight is a generative AI orchestration platform that makes AI usage **measurable, optimizable, and sustainable**.  
+Carbonsight is an **enterprise-first generative AI orchestration platform** that makes AI usage **measurable, optimizable, and sustainable**.  
+
+Prompting currently has been reduced to mere text inputs.
+
+CarbonSight
+- creates a prompt life cycle
+- uses genAI to handle optimisation of the prompt's entire life cycle. 
+
+This can be usedful for ESG reporting and carbon-credit mapping. 
+
 It introduces carbon-aware routing, semantic caching, and agent-driven prompt intelligence to reduce the environmental cost of large language models without sacrificing user experience.
 
 This project was built as part of an **AWS-sponsored Generative AI hackathon**, using Amazon Bedrock, AWS Lambda, DynamoDB, and a modern React frontend.
