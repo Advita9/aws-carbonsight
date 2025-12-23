@@ -250,120 +250,103 @@ Response Returned
 
 ### Generative AI
   - Amazon Bedrock
-  A. amazon.nova-micro-v1:0: Classification, routing, prompt rewriting
-  B. amazon.nova-lite-v1:0: Standard responses, medium complexity
-  C. amazon.nova-pro-v1:0: Complex reasoning and long-form responses
+    - **amazon.nova-micro-v1:0**: Classification, routing, prompt rewriting
+    - **amazon.nova-lite-v1:0**: Standard responses, medium complexity
+    - **amazon.nova-pro-v1:0**: Complex reasoning and long-form responses
 
 ### Storage & Caching
-  A. Amazon DynamoDB
+  - Amazon DynamoDB
     - Semantic cache for embeddings
     - Prevents redundant LLM calls
     - Reduces cost and carbon emissions
-  B. Intelligence & Agents
+
+  - Intelligence & Agents
     - Embedding-based similarity search
     - Agent-driven orchestration
     - Carbon estimation heuristics
 
+## How We Used Kiro in Carbonsight
 
-## Development with Kiro (Spec-Driven, Agentic Workflow)
+Kiro was used as a **spec-first coordination layer** to structure Carbonsight’s multi-agent system and dashboards while we were actively building and iterating.
 
-Carbonsight was developed using **Kiro** to move from rapid prototyping to a structured, production-ready Generative AI system. Kiro was used not just as an IDE, but as a **coordination layer for agent design, system behavior, and dashboard evolution**.
-
----
-
-### 1. Specs — Agentic Feature Design by Role
-
-Each major capability in Carbonsight was built as an independent **spec**, allowing features to evolve cleanly without breaking the system.
-
-For every spec, Kiro generated and tracked:
-
-- `requirements.md`  
-  - User stories written in **EARS notation**
-  - Explicit behavioral guarantees for agents, dashboards, and APIs
-
-- `design.md`  
-  - Agent responsibilities and boundaries  
-  - Prompt lifecycle diagrams  
-  - Data flow between frontend, Lambda, Bedrock, and DynamoDB  
-
-- `tasks.md`  
-  - Discrete backend and frontend tasks  
-  - Clear separation between agent logic, routing, and visualization  
-  - Real-time tracking of implementation progress  
-
-#### Agent-Specific Specs Created
-- **R-EcoWrite Agent** — prompt rewriting for carbon reduction
-- **Prompt Coach Agent** — clarity analysis and energy estimation
-- **Eco-Plan Agent** — step-wise execution planning
-- **Routing Agent** — complexity classification and model selection
-- **Carbon Agent** — energy and CO₂ estimation
-- **Caching Agent** — semantic similarity and reuse
-
-#### Dashboard-Specific Specs Created
-- **User Dashboard Spec**
-  - Efficiency score
-  - Prompt-level carbon metrics
-  - Token and model usage history
-
-- **Team Dashboard Spec**
-  - Leaderboards
-  - Model usage heatmaps
-  - Aggregated CO₂ savings
-
-- **Admin Dashboard Spec**
-  - Organization-wide analytics
-  - ESG reporting views
-  - Sustainability trends
-
-This spec-first approach ensured:
-- Clear separation of concerns across agents and UI layers
-- Predictable system behavior
-- Strong alignment between product intent and implementation
+Instead of writing features directly in code, we used Kiro to lock down **what each agent and dashboard is responsible for**, and then implemented against those specs.
 
 ---
 
-### 2. Hooks — Automated Quality and Consistency
+### Specs — Feature-by-Feature, Not Theory
 
-Kiro hooks were used to automate repetitive but critical development checks, especially important in an agent-heavy system.
+We created a separate Kiro spec for each major Carbonsight capability:
 
-Hooks were configured to:
+- **R-EcoWrite (Prompt Optimization)**
+  - Defined when rewriting should trigger
+  - Defined expected energy and CO₂ outputs
+  - Prevented rewriting from changing user intent
 
-- Enforce consistent file and agent structure
-- Auto-review agent logic after file saves
-- Flag missing error handling in Lambda handlers
-- Standardize API response schemas across endpoints
-- Prevent accidental regression in routing and caching logic
+- **Eco-Plan (Execution Planning)**
+  - Defined when planning is allowed (medium/complex queries only)
+  - Defined plan structure (ordered, bounded steps)
+  - Ensured plans are shown to the user before execution
 
-This reduced manual review overhead and ensured agent behavior stayed consistent as features were added quickly during the hackathon.
+- **Prompt Coach**
+  - Defined clarity scoring and feedback format
+  - Defined UI-only behavior (no backend execution)
+  - Defined energy estimation as advisory, not enforced
+
+- **Model Routing**
+  - Defined thresholds for Nova Micro / Lite / Pro
+  - Defined fallback behavior during throttling
+  - Defined sustainability-first routing rules
+
+- **Dashboards (Upcoming)**
+  - User-level efficiency score
+  - Team-level aggregation and leaderboards
+  - Admin-level ESG and usage analytics
+
+Each spec produced:
+- Concrete requirements (`WHEN X → SYSTEM SHALL Y`)
+- A clear data flow (frontend → Lambda → Bedrock → cache)
+- A task list that mapped directly to files and endpoints
+
+This helped us avoid feature overlap and agent conflicts as the system grew.
 
 ---
 
-### 3. Steering — Sustainability-First Agent Behavior
+### Hooks — Keeping Agent Code Clean Under Pressure
 
-Steering was used to guide **global system behavior**, especially around sustainability constraints.
+We used Kiro hooks mainly as **guardrails** during fast iteration:
 
-Steering rules were applied to:
+- Checked new agent files for missing error handling
+- Flagged inconsistent API response shapes
+- Helped keep routing, caching, and carbon metrics aligned
+- Reduced breakage when modifying Lambda handlers quickly
 
-- Prefer lower-carbon models (Nova Micro / Lite) when possible
-- Restrict Nova Pro usage to genuinely complex queries
-- Enforce prompt optimization before expensive calls
-- Maintain consistent carbon accounting across all agents
-- Align dashboard metrics with backend estimations
-
-This allowed Carbonsight to behave as a **responsible, sustainability-aware AI system by default**, not as an afterthought.
+This mattered a lot once multiple agents were calling Bedrock in different ways.
 
 ---
 
-### Impact of Using Kiro
+### Steering — Enforcing Sustainability by Default
 
-Using Kiro enabled Carbonsight to:
-- Move fast without accumulating design debt
-- Scale from a chat prototype to a multi-agent platform
-- Keep agent behavior explainable and auditable
+Steering was used to keep global behavior consistent:
+
+- Prefer low-carbon models unless complexity demands otherwise
+- Run optimization before planning or execution
+- Prevent accidental overuse of Nova Pro
+- Keep carbon accounting consistent across features
+
+This ensured Carbonsight stayed sustainability-first even as features were added rapidly.
+
+---
+
+### Why Kiro Mattered Here
+
+Kiro helped us:
+- Build multiple GenAI agents without losing control
+- Keep prompt lifecycle and execution transparent
 - Design dashboards in parallel with backend logic
-- Maintain production-level clarity under hackathon timelines
+- Maintain production discipline during a hackathon
 
----
+It let us move fast **without turning the system into an unstructured prompt soup**.
+
 
 ## Why This Project Fits the Hackathon
 
