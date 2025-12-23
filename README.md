@@ -24,6 +24,7 @@ Carbonsight helps developers and organizations:
 - Visualize and incentivize sustainable AI behavior
 
 ---
+![A local image](arch-diagram.png)
 
 ## Key Features
 
