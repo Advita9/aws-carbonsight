@@ -107,6 +107,11 @@ A forecasting agent is included as an extensible module.
 
 ---
 
+<img src="images/feature4.png" alt="A beautiful landscape">
+
+---
+
+
 ## Reading the Carbonsight Interface
 
 Carbonsight uses simple visual signals to make model choice, efficiency, and sustainability transparent. Every UI element reflects a real backend decision.
