@@ -95,11 +95,11 @@ A forecasting agent is included as an extensible module.
 
 ## Project Feature Gallery (UI screenshots)
 
-<img src="images/feature1.jpeg" alt="A beautiful landscape" width="1200" height="500">
+<img src="images/feature1.jpeg" alt="A beautiful landscape">
 
-<img src="images/feature2.jpeg" alt="A beautiful landscape" width="1200" height="500">
+<img src="images/feature2.jpeg" alt="A beautiful landscape">
 
-<img src="images/feature3.jpeg" alt="A beautiful landscape" width="1200" height="500">
+<img src="images/feature3.jpeg" alt="A beautiful landscape">
 
 
 ## Architecture Overview
