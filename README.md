@@ -374,9 +374,7 @@ Response Returned
 ## AWS Technology Stack
 
 ### Compute & Orchestration
-  - AWS Lambda
-    - Stateless agent orchestration
-    - Scales automatically with usage
+  - AWS Lambda (Stateless agent orchestration)
 
 ### Generative AI
   - Amazon Bedrock
@@ -385,15 +383,16 @@ Response Returned
     - **amazon.nova-pro-v1:0**: Complex reasoning and long-form responses
 
 ### Storage & Caching
-  - Amazon DynamoDB
-    - Semantic cache for embeddings
-    - Prevents redundant LLM calls
-    - Reduces cost and carbon emissions
+  - Amazon DynamoDB (Semantic cache for embeddings)
 
-  - Intelligence & Agents
-    - Embedding-based similarity search
-    - Agent-driven orchestration
-    - Carbon estimation heuristics
+### Monitoring
+  - CloudWatch
+
+### ESG logs and reports (future)
+  - s3
+
+### Forecasting and Trend modelling (future)
+  - SageMaker
 
 ---
 
