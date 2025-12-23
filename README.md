@@ -33,6 +33,19 @@ Carbonsight helps developers and organizations:
 - Visualize and incentivize sustainable AI behavior
 
 ---
+
+## Tehcnological Tri-agentic Architecture 
+
+1. Routing Agent
+Classifies prompt complexity and selects the most carbon-efficient Amazon Nova model (Micro / Lite / Pro), along with a bounded token budget.
+
+2. Embedding Agent
+Generates semantic embeddings and checks DynamoDB for similar past prompts. Cache hits bypass inference entirely, resulting in near-zero energy usage.
+
+3. Thinking Agent
+Controls reasoning depth by allocating a strict thinking budget, preventing over-generation and unnecessary token consumption
+
+
 <img src="images/arch-diagram.png" alt="A beautiful landscape" width="1200" height="500">
 
 ## Key Features
